@@ -46,7 +46,7 @@ class LoginRequirdMixins:
     def dispatch(self , request , *args , **kwargs):
         if request.user.is_authenticated == True:
             return redirect('home:home')
-        return super(LoginRequirdMixins ,  self ).dispatch(request , *args , **kwargs)
+        return super(LoginRequirdMixins,  self ).dispatch(request , *args , **kwargs)
     
 class LogoutRequirdMixins:
     def dispatch(self , request , *args , **kwargs):

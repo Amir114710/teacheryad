@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'social_django',
     'captcha',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -128,13 +129,12 @@ AUTH_USER_MODEL = 'account.User'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
+    'django.contrib.auth.backends.ModelBackend')
+
 # google recaptcha
 RECAPTCHA_PUBLIC_KEY = '6LeWtqAkAAAAAPMfnHJjIKqdYdiTi78C7Q0MrDJH'
 RECAPTCHA_PRIVATE_KEY = '6LeWtqAkAAAAAFhmxrAs9mIX5hZ5vtwCL0FZT-Zv'
-# SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # google account
 LOGIN_REDIRECT_URL = 'home:home'

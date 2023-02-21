@@ -19,7 +19,7 @@ class LoginView(LoginRequirdMixins , FormView):
         cd = form.cleaned_data
         user = authenticate(self.request, username=cd['email'] , password=cd['password'])
         if user is not None:
-            login(self.request, user)
+            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(self.request, 'شما با موفقیت وارد سایت شدید')
             return redirect(reverse_lazy('home:home'))
         else:
@@ -39,8 +39,8 @@ class RegisterView(LoginRequirdMixins , FormView):
         else:
             cd = form.cleaned_data
             user = User.objects.create_user(email=cd['email'], is_teacher=cd['is_teacher'] , password=cd['password1'])
-            login(self.request, user)
-            # messages.success(self.request, 'شما با موفقیت ثبت نام کرده اید')
+            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(self.request, 'شما با موفقیت ثبت نام کرده اید')
             return redirect(reverse_lazy('home:home'))
 
 
