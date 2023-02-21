@@ -1,8 +1,9 @@
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from django.core import validators
 from django import forms
 from .models import User
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 class UserCreationForm(forms.ModelForm):
@@ -48,7 +49,7 @@ class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ایمیل'}))
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'password-field'}))
-
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 class RegisterForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ایمیل'}))
@@ -56,15 +57,15 @@ class RegisterForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'password-field'}))
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار گذرواژه'}))
-    is_teacher = forms.CharField(        
-        widget=forms.CheckboxInput(attrs={'class': 'form-control'}) , required=False)
+    is_teacher = forms.CharField(
+        widget=forms.CheckboxInput(attrs={'class': 'form-control'}), required=False)
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
             raise ValidationError("کاربر با این ایمیل در سایت وجود دارد")
         return email
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")

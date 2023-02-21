@@ -20,6 +20,7 @@ class LoginView(LoginRequirdMixins , FormView):
         user = authenticate(self.request, username=cd['email'] , password=cd['password'])
         if user is not None:
             login(self.request, user)
+            messages.success(self.request, 'شما با موفقیت وارد سایت شدید')
             return redirect(reverse_lazy('home:home'))
         else:
             form.add_error("email", "اطلاعات شما نادرست است؟")
@@ -39,6 +40,7 @@ class RegisterView(LoginRequirdMixins , FormView):
             cd = form.cleaned_data
             user = User.objects.create_user(email=cd['email'], is_teacher=cd['is_teacher'] , password=cd['password1'])
             login(self.request, user)
+            # messages.success(self.request, 'شما با موفقیت ثبت نام کرده اید')
             return redirect(reverse_lazy('home:home'))
 
 
@@ -87,5 +89,5 @@ class PanelDelete(TeacherRequirdMixins , LogoutRequirdMixins , SuperUserMixin, D
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "شما با موفقیت خارج شدین")
+    messages.success(request, "شما خارج شدید از سایت")
     return redirect("home:home")

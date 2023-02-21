@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معلم یاد</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/account_circle_black_36dp.svg" %}">
+    {#    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/account_circle_black_36dp.svg" %}">#}
     <link rel="stylesheet" href="{% static "css/bootstrap.rtl.css" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.rtl.min.css" %}">
     <link rel="stylesheet" href="{% static "css/slick.css" %}" type="text/css"/>
@@ -46,6 +46,15 @@
 <video autoplay muted loop id="bg-video">
     <source src="{% static "video/mixkit-focus-on-a-stack-of-books-in-a-library-21597.mp4" %}" type="video/mp4">
 </video>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert" dir="rtl">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div class="page-container">
     <div class="container-fluid">

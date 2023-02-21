@@ -23,5 +23,6 @@ class Teacher(models.Model):
         return f"{self.is_teacher}/{self.username}"
 
     class Meta:
+        ordering = ("-name_field",)
         verbose_name = 'مدرس'
         verbose_name_plural = "معلم ها"

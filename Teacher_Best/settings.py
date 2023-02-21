@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'django_cleanup.apps.CleanupConfig',
     'social_django',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -130,14 +131,16 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-# google account
+# google recaptcha
+RECAPTCHA_PUBLIC_KEY = '6LeWtqAkAAAAAPMfnHJjIKqdYdiTi78C7Q0MrDJH'
+RECAPTCHA_PRIVATE_KEY = '6LeWtqAkAAAAAFhmxrAs9mIX5hZ5vtwCL0FZT-Zv'
+# SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
+# google account
 LOGIN_REDIRECT_URL = 'home:home'
 LOGOUT_REDIRECT_URL = 'home:home'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '371979553571-q9dk430jf4ma5m6pf2s9d0l6lclqebdn.apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '150775631838-nhlkn3gcu9505n8qkhjaajn8rodgqoul.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [

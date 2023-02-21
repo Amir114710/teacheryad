@@ -32,6 +32,14 @@
             </button>
         </div>
     {% endfor %}
+    {% for error in form.errors.captcha %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ error }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
     <!-- /.login-logo -->
     <div class="card" id="app">
         <div class="card-body login-card-body">
@@ -70,6 +78,10 @@
                         <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
                     </div>
                     <!-- /.col -->
+                </div>
+                <div class="social-auth-links text-center mb-3">
+                    <p></p>
+                    {{ form.captcha }}
                 </div>
             </form>
 
