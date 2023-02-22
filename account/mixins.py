@@ -1,6 +1,5 @@
-from django.http import Http404
 from teacher.models import Teacher
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 
 
 class FieldsUserMixin():
@@ -10,7 +9,7 @@ class FieldsUserMixin():
         elif request.user:
             self.fields = ["username", "name_field", "Foundation", "discription", "image"]
         else:
-            raise Http404('مقاله شما دردست نیست')
+            return render(request, '404.html')
         return super(FieldsUserMixin, self).dispatch(request, *args, **kwargs)
 
 
@@ -31,7 +30,8 @@ class UpdateMixin():
         if teacher.user == request.user or request.user.is_admin:
             return super(UpdateMixin, self).dispatch(request, *args, **kwargs)
         else:
-            raise Http404('مقاله شما دردست نیست')
+            return render(request, '404.html')
+
 
 
 class SuperUserMixin():
@@ -39,7 +39,7 @@ class SuperUserMixin():
         if request.user.is_admin:
             return super(SuperUserMixin, self).dispatch(request, *args, **kwargs)
         else:
-            raise Http404('دردست نیست')
+            return render(request, '404.html')
 
 
 class LoginRequirdMixins:

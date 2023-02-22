@@ -59,6 +59,7 @@ class RegisterForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار گذرواژه'}))
     is_teacher = forms.CharField(
         widget=forms.CheckboxInput(attrs={'class': 'form-control'}), required=False)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
