@@ -89,47 +89,9 @@
                     <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                افزودن
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{% url "account:panel_user" %}" class="nav-link">
-                                    <i class="fa fa-table nav-icon"></i>
-                                    <p>لیست مقاله</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url "account:panel_edit" %}" class="nav-link">
-                                    <i class="fa fa-edit nav-icon"></i>
-                                    <p>افزودن مقاله</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url "account:profile" %}" class="nav-link active">
-                            <i class="nav-icon fa fa-user-astronaut"></i>
-                            <p>
-                                پروفایل
-                            </p>
-                        </a>
                     </li>
-                    {% if user.is_admin %}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-star"></i>
-                                <p>
-                                    vip
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
-                    {% endif %}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
