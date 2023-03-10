@@ -2,9 +2,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView
 from .models import Support
 from teacher.models import Teacher
+from aboutus.models import Home
+
+
+
 class HomeView(ListView):
     model = Teacher
-    template_name = 'home/index.html'
+
+    def get(self, request):
+        about = Home.objects.all()
+        return render(request, 'home/index.html', {'about': about})
 
     def post(self, request):
         if request.method == 'POST':

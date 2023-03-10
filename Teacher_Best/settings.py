@@ -27,11 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # My_Apps
-    'home.apps.HomeConfig',
-    'account.apps.AccountConfig',
-    'teacher.apps.TeacherConfig',
-    'post.apps.PostConfig',
     # My_package
     'crispy_forms',
     "crispy_bootstrap5",
@@ -39,6 +34,12 @@ INSTALLED_APPS = [
     'social_django',
     'captcha',
     'ckeditor',
+    # My_Apps
+    'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
+    'teacher.apps.TeacherConfig',
+    'post.apps.PostConfig',
+    'aboutus.apps.AboutusConfig'
 ]
 
 MIDDLEWARE = [
