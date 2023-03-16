@@ -2,6 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from teacher.models import Teacher
+from .models import Like
+from django.http import JsonResponse
 
 
 class ListDetailView(ListView):
@@ -16,6 +18,14 @@ class DetailView(DetailView):
     model = Teacher
     template_name = 'post/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.likes.filter(user_id=self.object.pk).exists():
+            context['is_like'] = True
+        else:
+            context['is_like'] = False
+        return context
+
 
 def SearchListView(request):
     q = request.GET.get('q')
@@ -24,3 +34,13 @@ def SearchListView(request):
     paginator = Paginator(teacher, 3)
     object_list = paginator.get_page(page_number)
     return render(request, 'post/list_detail.html', {"object_list": object_list, "page_obj": object_list})
+
+
+def like(self, request, pk):
+    try:
+        like = Like.objects.get(user_id=pk)
+        like.delete()
+        return JsonResponse({"response": "dislike"})
+    except:
+        Like.objects.create(user_id=pk)
+    return JsonResponse({"response": "liked"})

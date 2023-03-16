@@ -173,7 +173,9 @@
                                         <th>ایمیل</th>
                                         <th>نام</th>
                                         <th>رشته</th>
-                                        <th>پایه چندم</th>
+                                        <th>پایه</th>
+                                        <th>رتبه کنکور</th>
+                                        <th>سابقه تحصیلی</th>
                                         <th>توضیحات</th>
                                         <th>عکس بند انگشتی</th>
                                         <th>وعضیت</th>
@@ -187,6 +189,8 @@
                                             <td>{{ teacher.username }}</td>
                                             <td>{{ teacher.name_field }}</td>
                                             <td>{{ teacher.Foundation }}</td>
+                                            <td>{{ teacher.entrance }}</td>
+                                            <td>{{ teacher.teaching }}</td>
                                             <td>{{ teacher.discription|striptags|truncatechars:20 }}</td>
                                             <td><img src="{{ teacher.image.url }}" width="120"></td>
                                             <td>
