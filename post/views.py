@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView
 from teacher.models import Teacher
 from .models import Like
@@ -17,10 +17,9 @@ class ListDetailView(ListView):
 class DetailView(DetailView):
     model = Teacher
     template_name = 'post/detail.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.likes.filter(user_id=self.object.pk).exists():
+        if self.request.user.likes.filter(teacher__username = self.object.username , user_id = self.request.user.id).exists():
             context['is_like'] = True
         else:
             context['is_like'] = False
@@ -36,11 +35,10 @@ def SearchListView(request):
     return render(request, 'post/list_detail.html', {"object_list": object_list, "page_obj": object_list})
 
 
-def like(self, request, pk):
+def like(request , id , pk):
     try:
-        like = Like.objects.get(user_id=pk)
+        like = Like.objects.get(teacher__id = id  , user_id=request.user.id)
         like.delete()
-        return JsonResponse({"response": "dislike"})
     except:
-        Like.objects.create(user_id=pk)
-    return JsonResponse({"response": "liked"})
+        Like.objects.create(teacher_id=pk , user_id = request.user.id)
+    return redirect('post:user_Detail' , pk)
